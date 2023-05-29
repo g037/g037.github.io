@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>have fun</title>
+		<link rel="stylesheet" href="mystyle.css">
+	</head>
+	<body>
+		<div>
+			<p>You can enter three numbers (1-10) and get the reward. (remember to submit)</p>
+			<p>If you get one number correct, you can get 100 dollars!(third prize)</p>
+			<p>If you get two numbers correct, you can get 300 dollars!!(second prize)</p>
+			<p>And if you get all correct, you can get 1000 dollars!!!(first prize)</p>
+			<input id="guessnum1" type="number">
+			<input id="guessnum2" type="number">
+			<input id="guessnum3" type="number">
+			<button onclick="myFunction()">Submit</button>
+			<br>
+			<p id="demo"></p>
+		</div>
+		<script>
+			const luckynum1 = Math.floor(Math.random() * 10) + 1;
+			let num = luckynum1;
+			for(i=1;i>0;i++){
+				num = Math.floor(Math.random() * 10) + 1;
+				if(num!=luckynum1){
+					break;
+				}
+			}
+			const luckynum2 = num;
+			for(i=1;i>0;i++){
+				num = Math.floor(Math.random() * 10) + 1;
+				if(num!=luckynum1&&num!=luckynum2){
+					break;
+				}
+			}
+			const luckynum3 = num;
+			let success = 0;
+			function myFunction(){
+				let input1 = document.getElementById("guessnum1").value;
+				let input2 = document.getElementById("guessnum2").value;
+				let input3 = document.getElementById("guessnum3").value;
+				let text='';
+				if(luckynum1==input1||luckynum1==input2){
+					success++;
+				}
+				else if(luckynum1==input3||luckynum2==input1){
+					success++;
+				}
+				else if(luckynum2==input2||luckynum2==input3){
+					success++;
+				}
+				else if(luckynum3==input1||luckynum3==input2){
+					success++;
+				}
+				else if(luckynum3==input3){
+					success++;
+				}
+
+				if(success==0){
+					text = 'Sorry. No prise.';
+				}
+				else if(success==1){
+					text = "Nice, third prize. You get 100 dollars!";	
+				}
+				else if(success==2){
+					text = "Great, second prize. You get 300 dollars!!"
+				}
+				else if(success==3){
+					text = "Congradulation, first prize. You win 1000 dollars!!!"
+				} 
+				if(input1==input2||input1==input3){
+					text = "wrong input";
+				}
+				else if(input2==input3){
+					text = "wrong input";
+				}
+				document.getElementById("demo").innerHTML = text;
+			}
+		</script>
+	</body>
+</html>
